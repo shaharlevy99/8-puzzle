@@ -171,9 +171,12 @@
         }
     }
 
+    // CR: Name could be better.
     function precede(id) {
         checkAdjacent(nums[(id - 1)]);
         console.log(inversionOptions);
+        // CR: Generally: Use for...of when iterating over an array.
+        //     Here: Again, finding the empty tile could be better.
         for (var i = 0; i < inversionOptions.length; i++) {
             if (document.getElementById(inversionOptions[i]).innerText == "") {
                 document.getElementById(inversionOptions[i]).innerText = document.getElementById(id).innerText;
@@ -181,7 +184,11 @@
                 document.getElementById(id).innerHTML = "";
                 document.getElementById(id).style.display = "none";
                 add();
+                // CR: Updating the whole element with almost the same content every time is not good.
                 document.getElementById("counter").innerHTML = "The move counter is: " + counter;
+                // CR: Here, I would prefer to see something like:
+                //     if isWin():
+                //         declareWin()
                 isWin();
             }
         }
