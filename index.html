@@ -86,6 +86,8 @@
     // CR: This initialization process isn't very clear. I think it'd be better if it's logically divided to functions.
     // Initialization
     for (var i = 0; i < 1000; i++) {
+        // CR: Looping through all your cells and checking the DOM value to find the empty space is pretty expensive.
+        //     Find a better way to do it.
         for (var x = 0; x < 9; x++) {
             // CR: == is generally dangerous, read about it and ===.
             //     Also, this logic also happens in another place, might consider making it a function.
@@ -98,12 +100,16 @@
             }
         }
 
+        // CR: In my opinion, the empty tile doesn't have to be right-bottom at start.
+        //     If you insist, I think it could be better than hoping for it and checking.
+        //     Generally, your code should do as little as possible to achieve the most. This initialization process loops A LOT.
         if ((i > 80) && (document.getElementById(nums[8]).innerText == "")) {
             document.getElementById(nums[8]).innerHTML = "";
             document.getElementById(nums[8]).style.display = "none";
             break;
         }
 
+        // CR: not very good behaviour in a for loop.
         if (i == 999) {
             i = 0;
         }
