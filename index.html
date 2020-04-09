@@ -1,159 +1,173 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-h1 {
-font-family: arial
-}
-p {
-font-family: arial
-}
-button {
-  font-size: 80px;
-  width: 100px;
-  font-family: arial
-}
-table, td {
-  margin: 30px;
-  border: 1px solid black;
-  border-collapse: collapse;
-  font-family: arial
-}
-td {
-  padding: 5px;
-  text-align: left;  
-  font-family: arial
-}
-</style>
+    <style>
+        h1 {
+            font-family: arial
+        }
+
+        p {
+            font-family: arial
+        }
+
+        button {
+            font-size: 80px;
+            width: 100px;
+            font-family: arial
+        }
+
+        table, td {
+            margin: 30px;
+            border: 1px solid black;
+            border-collapse: collapse;
+            font-family: arial
+        }
+
+        td {
+            padding: 5px;
+            text-align: left;
+            font-family: arial
+        }
+    </style>
 </head>
 <body>
 <h1 style="font-size:40px">Welcome to the game</h1>
 
 <table>
-  <tr>
-    <td><button id="1" onClick="precede(this.id)"> 1 </button></td>
-    <td><button id="2" onClick="precede(this.id)"> 2 </button></td>
-    <td><button id="3" onClick="precede(this.id)"> 3 </button></td>
-  </tr>
-  <tr>
-    <td><button id="4" onClick="precede(this.id)"> 4 </button></td>
-    <td><button id="5" onClick="precede(this.id)"> 5 </button></td>
-    <td><button id="6" onClick="precede(this.id)"> 6 </button></td>
-  </tr>
-  <tr>
-    <td><button id="7" onClick="precede(this.id)"> 7 </button></td>
-    <td><button id="8" onClick="precede(this.id)"> 8 </button></td>
-    <td><Button id="9" onClick="precede(this.id)"> </button></td>
-  </tr>
+    <tr>
+        <td>
+            <button id="1" onClick="precede(this.id)"> 1</button>
+        </td>
+        <td>
+            <button id="2" onClick="precede(this.id)"> 2</button>
+        </td>
+        <td>
+            <button id="3" onClick="precede(this.id)"> 3</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button id="4" onClick="precede(this.id)"> 4</button>
+        </td>
+        <td>
+            <button id="5" onClick="precede(this.id)"> 5</button>
+        </td>
+        <td>
+            <button id="6" onClick="precede(this.id)"> 6</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button id="7" onClick="precede(this.id)"> 7</button>
+        </td>
+        <td>
+            <button id="8" onClick="precede(this.id)"> 8</button>
+        </td>
+        <td>
+            <Button id="9" onClick="precede(this.id)"></button>
+        </td>
+    </tr>
 </table>
 
-<h1 id="winner" style= "color:purple;font-size:50px"></h1>
-<p id="counter" style= "font-size:25px"> The move counter is: 0 </p>
+<h1 id="winner" style="color:purple;font-size:50px"></h1>
+<p id="counter" style="font-size:25px"> The move counter is: 0 </p>
 
 <script>
-var counter = 0;
-var nums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-var inversionOptions;
-var adjacentNum;
+    var counter = 0;
+    var nums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    var inversionOptions;
+    var adjacentNum;
 
-// Initialization
-for(var i = 0; i < 1000; i++) {
-	for(var x = 0; x < 9 ; x++) {
-		if(document.getElementById(nums[x]).innerText == "") {
-        	checkAdjacent (nums[x]);
-            adjacentNum = Math.floor(Math.random() * inversionOptions.length);
-			document.getElementById(nums[x]).innerHTML = document.getElementById(inversionOptions[adjacentNum]).innerHTML;
-			document.getElementById(inversionOptions[adjacentNum]).innerHTML = "";
+    // Initialization
+    for (var i = 0; i < 1000; i++) {
+        for (var x = 0; x < 9; x++) {
+            if (document.getElementById(nums[x]).innerText == "") {
+                checkAdjacent(nums[x]);
+                adjacentNum = Math.floor(Math.random() * inversionOptions.length);
+                document.getElementById(nums[x]).innerHTML = document.getElementById(inversionOptions[adjacentNum]).innerHTML;
+                document.getElementById(inversionOptions[adjacentNum]).innerHTML = "";
+                break;
+            }
+        }
+
+        if ((i > 80) && (document.getElementById(nums[8]).innerText == "")) {
+            document.getElementById(nums[8]).innerHTML = "";
+            document.getElementById(nums[8]).style.display = "none";
             break;
         }
-	}
-    
-    if((i > 80) && (document.getElementById(nums[8]).innerText == ""))
-    {
-    	document.getElementById(nums[8]).innerHTML = "";
-		document.getElementById(nums[8]).style.display = "none";
-	    break;
-    }
-    
-    if (i == 999)
-    {
-    	i = 0;
-	}
-}
 
-function checkAdjacent(id) {
-	switch (id) {
-    	case 1:
-        	inversionOptions = [2, 4];
-            break;
-        case 2:
-        	inversionOptions = [1, 3, 5];
-            break;
-        case 3:
-        	inversionOptions = [2, 6];
-            break;
-        case 4:
-        	inversionOptions = [1, 5, 7];
-            break;
-        case 5:
-        	inversionOptions = [2, 4, 6, 8];
-            break;
-        case 6:
-        	inversionOptions = [3, 5, 9];
-            break;
-        case 7:
-        	inversionOptions = [4, 8];
-            break;
-        case 8:
-        	inversionOptions = [5, 7, 9];
-            break;
-        case 9:
-        	inversionOptions = [6, 8];
-            break;
-	}
-}
-
-function add() {
-  counter += 1;
-}
-
-function isWin(){
-	var win = 0;
-	for(var i = 0; i < (nums.length - 1) ; i++)
-    {
-    	if(document.getElementById(nums[i]).innerText == [i + 1])
-        {
-        	win += 1;
+        if (i == 999) {
+            i = 0;
         }
-        
-        else 
-        {
-        	break;
-       	}
     }
-	if(win == 8) {
-    	document.getElementById("winner").innerHTML = "Congratulations! You won!";
+
+    function checkAdjacent(id) {
+        switch (id) {
+            case 1:
+                inversionOptions = [2, 4];
+                break;
+            case 2:
+                inversionOptions = [1, 3, 5];
+                break;
+            case 3:
+                inversionOptions = [2, 6];
+                break;
+            case 4:
+                inversionOptions = [1, 5, 7];
+                break;
+            case 5:
+                inversionOptions = [2, 4, 6, 8];
+                break;
+            case 6:
+                inversionOptions = [3, 5, 9];
+                break;
+            case 7:
+                inversionOptions = [4, 8];
+                break;
+            case 8:
+                inversionOptions = [5, 7, 9];
+                break;
+            case 9:
+                inversionOptions = [6, 8];
+                break;
+        }
     }
-    else {
-	    win = 0;
+
+    function add() {
+        counter += 1;
     }
-}      
-        
-function precede(id) {
-	checkAdjacent(nums[(id-1)]);
-    console.log(inversionOptions);
-	for(var i = 0; i < inversionOptions.length; i++) {
-    	if(document.getElementById(inversionOptions[i]).innerText == "") {
-        	document.getElementById(inversionOptions[i]).innerText = document.getElementById(id).innerText;
- 			document.getElementById(inversionOptions[i]).style.display = "block";
-			document.getElementById(id).innerHTML = "";
-        	document.getElementById(id).style.display = "none";
-        	add();
-            document.getElementById("counter").innerHTML = "The move counter is: " + counter;
- 		    isWin();
-		}
-	}
-}
+
+    function isWin() {
+        var win = 0;
+        for (var i = 0; i < (nums.length - 1); i++) {
+            if (document.getElementById(nums[i]).innerText == [i + 1]) {
+                win += 1;
+            } else {
+                break;
+            }
+        }
+        if (win == 8) {
+            document.getElementById("winner").innerHTML = "Congratulations! You won!";
+        } else {
+            win = 0;
+        }
+    }
+
+    function precede(id) {
+        checkAdjacent(nums[(id - 1)]);
+        console.log(inversionOptions);
+        for (var i = 0; i < inversionOptions.length; i++) {
+            if (document.getElementById(inversionOptions[i]).innerText == "") {
+                document.getElementById(inversionOptions[i]).innerText = document.getElementById(id).innerText;
+                document.getElementById(inversionOptions[i]).style.display = "block";
+                document.getElementById(id).innerHTML = "";
+                document.getElementById(id).style.display = "none";
+                add();
+                document.getElementById("counter").innerHTML = "The move counter is: " + counter;
+                isWin();
+            }
+        }
+    }
 </script>
 </body>
 </html>
