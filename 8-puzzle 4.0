@@ -48,7 +48,7 @@ td {
 </table>
 
 <h1 id="winner" style= "color:purple;font-size:50px"></h1>
-<p id="counter" style= "font-size:25px"></p>
+<p id="counter" style= "font-size:25px"> The move counter is: 0 </p>
 
 <script>
 var counter = 0;
@@ -56,6 +56,7 @@ var nums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 var inversionOptions;
 var adjacentNum;
 
+// Initialization
 for(var i = 0; i < 1000; i++) {
 	for(var x = 0; x < 9 ; x++) {
 		if(document.getElementById(nums[x]).innerText == "") {
@@ -69,6 +70,8 @@ for(var i = 0; i < 1000; i++) {
     
     if((i > 80) && (document.getElementById(nums[8]).innerText == ""))
     {
+    	document.getElementById(nums[8]).innerHTML = "";
+		document.getElementById(nums[8]).style.display = "none";
 	    break;
     }
     
@@ -77,10 +80,6 @@ for(var i = 0; i < 1000; i++) {
     	i = 0;
 	}
 }
-
-document.getElementById(nums[8]).innerHTML = "";
-document.getElementById(nums[8]).style.display = "none";
-document.getElementById("counter").innerHTML = "The move counter is: 0";
 
 function checkAdjacent(id) {
 	switch (id) {
