@@ -78,6 +78,8 @@
     //     https://softwareengineering.stackexchange.com/questions/274342/is-there-any-reason-to-use-the-var-keyword-in-es6
     var counter = 0;
     var nums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    // CR: Took me some time to understand how you use this. Using checkAdjacent to mutate this makes me itch from the inside.
+    //     It also seems that when you use inversionOptions.length it's not yet initialized.
     var inversionOptions;
     var adjacentNum;
 
