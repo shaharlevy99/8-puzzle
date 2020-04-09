@@ -1,0 +1,12 @@
+Hi :)
+
+First of all, I'm using JetBrains PhpStorm as my IDE. It's called PHPstorm but it's like their product WebStorm but with
+php and some more additions. It's great for any web development I think, and has great features.
+For example, I used it for formatting index.html. (Using ctrl+alt+l and ctrl+alt+o)
+
+Second of all, to view the final output (an actual web page) I used an npm* package called http-server, which I found
+here: https://stackoverflow.com/questions/6084360/using-node-js-as-a-simple-web-server.
+
+
+* npm is a package-control software (like pip and nuget) which has a great cli and is used a lot in web development.
+  Read about it more online.
