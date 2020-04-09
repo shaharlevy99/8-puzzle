@@ -161,9 +161,12 @@
                 break;
             }
         }
+        // CR: If the code gets here, win must be 8. win is redundant.
         if (win == 8) {
+            // CR: I would take this out to a function named "declareWinner" or something.
             document.getElementById("winner").innerHTML = "Congratulations! You won!";
         } else {
+            // If you decide to still use win, this is redundant.
             win = 0;
         }
     }
