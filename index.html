@@ -85,6 +85,8 @@
     // Initialization
     for (var i = 0; i < 1000; i++) {
         for (var x = 0; x < 9; x++) {
+            // CR: == is generally dangerous, read about it and ===.
+            //     Also, this logic also happens in another place, might consider making it a function.
             if (document.getElementById(nums[x]).innerText == "") {
                 checkAdjacent(nums[x]);
                 adjacentNum = Math.floor(Math.random() * inversionOptions.length);
