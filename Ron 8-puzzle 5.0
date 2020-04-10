@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body{
+font-family: arial;
+}
+img {
+width: 160px;
+height: 200px;
+}
+h1 {
+margin: 30px;
+}
+p {
+margin: 30px;
+}
+table, td {
+margin: 30px;
+border: 1px solid black;
+border-collapse: collapse;
+}
+</style>
+</head>
+<body>
+<h1 id= "header" style="font-size:30px">Welcome to the game</h1>
+<h1 id="winner" style= "color:purple;font-size:50px"></h1>
+<p style= "font-size:25px"> The move counter is: <var id="counter"></var></p>
+<table>
+  <tr>
+    <td><img src="https://imgur.com/xI0exJV.jpg" alt="1" id="1" onClick="moveCell(this.id)"></td>
+    <td><img src="https://imgur.com/l9KE0lz.jpg" alt="2" id="2" onClick="moveCell(this.id)"></td>
+    <td><img src="https://imgur.com/QOcw7Th.jpg" alt="3" id="3" onClick="moveCell(this.id)"></td>
+  </tr> 
+  <tr> 
+    <td><img src="https://imgur.com/t0js8Ja.jpg" alt="4" id="4" onClick="moveCell(this.id)"></td>
+    <td><img src="https://imgur.com/Lxd8Rwl.jpg" alt="5" id="5" onClick="moveCell(this.id)"></td>
+    <td><img src="https://imgur.com/LuyltEj.jpg" alt="6" id="6" onClick="moveCell(this.id)"></td>
+  </tr> 
+  <tr> 
+    <td><img src="https://imgur.com/aAoORIw.jpg" alt="7" id="7" onClick="moveCell(this.id)"></td>
+    <td><img src="https://imgur.com/nnF8vck.jpg" alt="8" id="8" onClick="moveCell(this.id)"></td>
+    <td><img src="//:0" alt="9" id="9" onClick="moveCell(this.id)"></td>
+  </tr>
+</table>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<script>
+var counter = 0;
+var nums = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+var emptyCell = 9;
+
+// Initialization
+for(var i = 0; i < 10; i++) {
+	shuffleNumbers();
+	while(document.getElementById(nums[8]).src !== "https://:0/")
+    {
+		shuffleNumbers();
+	}
+}
+
+document.getElementById(nums[8]).style.display = "none";
+
+function shuffleNumbers() {
+	var adjacentNum;
+	checkAdjacent(nums[(emptyCell-1)]);
+	adjacentNum = Math.floor(Math.random() * inversionOptions.length);
+	document.getElementById(nums[(emptyCell-1)]).src = 	document.getElementById(inversionOptions[adjacentNum]).src;
+    document.getElementById(nums[(emptyCell-1)]).alt = 	document.getElementById(inversionOptions[adjacentNum]).alt;
+	document.getElementById(inversionOptions[adjacentNum]).src = "https://:0/";
+    emptyCell = inversionOptions[adjacentNum];
+    document.getElementById(inversionOptions[adjacentNum]).alt = 					inversionOptions[adjacentNum];
+}
+
+function checkAdjacent(id) {
+	switch (id) {
+    	case 1:
+        	inversionOptions = [2, 4];
+            break;
+        case 2:
+        	inversionOptions = [1, 3, 5];
+            break;
+        case 3:
+        	inversionOptions = [2, 6];
+            break;
+        case 4:
+        	inversionOptions = [1, 5, 7];
+            break;
+        case 5:
+        	inversionOptions = [2, 4, 6, 8];
+            break;
+        case 6:
+        	inversionOptions = [3, 5, 9];
+            break;
+        case 7:
+        	inversionOptions = [4, 8];
+            break;
+        case 8:
+        	inversionOptions = [5, 7, 9];
+            break;
+        case 9:
+        	inversionOptions = [6, 8];
+            break;
+	}
+    return inversionOptions;
+}
+
+
+function declareWinner(){
+	document.getElementById("winner").innerHTML = "Congratulations! You won!";
+    document.getElementById(nums[8]).src = "https://imgur.com/zvz6wMS.jpg";
+    document.body.style.backgroundImage = "url('https://imgur.com/Rid348y.jpg')";
+	document.getElementById("header").style.display = "none";
+}
+
+function isWin(){
+	for(var i = 0; i < (nums.length - 1) ; i++)
+    {
+    	if(document.getElementById(nums[i]).alt != [i+1])
+        {
+			return false;
+        }
+    }
+   	return true;
+}      
+        
+function moveCell(id) {
+	var emptyCellAlt;
+    //try to only use the emptyCell var to know where to move the cell when clicked
+	checkAdjacent(nums[(id-1)]);
+	for(var i = 0; i < inversionOptions.length; i++) {
+    	if(document.getElementById(inversionOptions[i]).src === "https://:0/") {
+        	emptyCellAlt = document.getElementById(inversionOptions[i]).alt;
+        	document.getElementById(inversionOptions[i]).src = document.getElementById(id).src;
+            document.getElementById(inversionOptions[i]).alt = document.getElementById(id).alt;
+            document.getElementById(id).alt = emptyCellAlt;
+ 			document.getElementById(inversionOptions[i]).style.display = "block";
+			document.getElementById(id).src = "https://:0/";
+        	document.getElementById(id).style.display = "none";
+        	counter += 1;
+			$("#counter").text(counter);
+ 		    if(isWin()){
+            	document.getElementById(id).style.display = "block";
+            	declareWinner();
+			}
+		}
+	}
+}
+</script>
+</body>
+</html>
